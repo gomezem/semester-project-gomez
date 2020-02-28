@@ -27,14 +27,39 @@ public class SearchGomez extends HttpServlet {
    void search(String keyword, HttpServletResponse response) throws IOException {
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
-      String title = "Database Result";
+      String title = "Inventory List";
       String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + //
             "transitional//en\">\n"; //
       out.println(docType + //
             "<html>\n" + //
-            "<head><title>" + title + "</title></head>\n" + //
-            "<body bgcolor=\"#f0f0f0\">\n" + //
-            "<h1 align=\"center\">" + title + "</h1>\n");
+            "<body><header>\n" + //
+            "<head><title>" + title + "</title>" + //
+            "<style> header { background-color:5e2bff;" + //
+                "color:white;" + //
+                "text-align:center;"+ //
+                "padding:5px;}" + //	 
+            "nav {line-height:30px;"+ //
+                "background-color:#eeeeee;"+ //
+                "height:300px;"+ //
+                "width:100px;"+ //
+                "float:left;"+ //
+                "padding:5px;}"+ //	      
+            "section {width:350px;"+ //
+                "float:left;"+ //
+                "padding:10px;}"+ //
+            "footer { background-color:5e2bff;"+ //
+                "color:white;"+ //
+                "clear:both;"+ //
+                "text-align:center;"+ //
+                "padding:5px;}"+ //	 	 
+  
+            "</style></head>\n" + //
+
+            "<h1 align=\"center\">" + title + "</h1>\n</header>" + //
+            
+            "<nav><a href=search_gomez.html>Search User</a> <br>" + //
+      		"<a href=insert_gomez.html>Insert Item</a> <br></nav>" + //
+      		"<section>");
 
       Connection connection = null;
       PreparedStatement preparedStatement = null;
@@ -52,6 +77,16 @@ public class SearchGomez extends HttpServlet {
             preparedStatement.setString(1, theUserName);
          }
          ResultSet rs = preparedStatement.executeQuery();
+         
+         out.println("User Account <b>" + keyword + "</b><br>");
+         out.println("<table>");
+         out.println("<tr>");
+         out.println("<td><b>Item</b></td>");
+         out.println("<td><b>Quantity</b></td>");
+         out.println("<td><b>Location</b></td>");
+         out.println("<td><b>Value</b></td>");
+         out.println("</tr>");
+
 
          while (rs.next()) {
              int id = rs.getInt("id");
@@ -62,17 +97,17 @@ public class SearchGomez extends HttpServlet {
              String value = rs.getString("value").trim();
 
              if (keyword.isEmpty() || userName.contains(keyword)) {
-                out.println("ID: " + id + ", ");
-                out.println("User: " + userName + ", ");
-                out.println("Item: " + item + ", ");
-                out.println("Quantity: " + quantity +", ");
-                out.println("Location: " + location + ", ");
-                out.println("Value: " + value + " <br>");
+//                out.println("ID: " + id + ", ");
+//                out.println("User: " + userName + ", ");
+                out.println("<tr><td>" + item + "</td>");
+                out.println("<td>" + quantity + "</td>");
+                out.println("<td>" + location + "</td>");
+                out.println("<td>" + value + "</td></tr>");
              }
           }
-         out.println("<a href=/webproject-inventory-gomez/search_gomez.html>Search Data</a> <br>");
-         out.println("<a href=/webproject-inventory-gomez/insert_gomez.html>Insert Data</a> <br>");
-
+//         out.println("<a href=/webproject-inventory-gomez/search_gomez.html>Search Data</a> <br>");
+//         out.println("<a href=/webproject-inventory-gomez/insert_gomez.html>Insert Data</a> <br>");
+         out.println("</table></section><footer>Copyright @Gomez</footer></body></html>");
          out.println("</body></html>");
          rs.close();
          preparedStatement.close();
