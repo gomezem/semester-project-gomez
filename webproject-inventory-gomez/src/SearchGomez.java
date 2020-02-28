@@ -34,7 +34,7 @@ public class SearchGomez extends HttpServlet {
 				"<html>\n" + //
 				"<body><header>\n" + //
 				"<head><title>" + title + "</title>" + //
-				"<style> header { background-color:5e2bff;" + //
+				"<style> header { background-color:blue;" + //
 				"color:white;" + //
 				"text-align:center;"+ //
 				"padding:5px;}" + //	 
@@ -47,7 +47,7 @@ public class SearchGomez extends HttpServlet {
 				"section {width:350px;"+ //
 				"float:left;"+ //
 				"padding:10px;}"+ //
-				"footer { background-color:5e2bff;"+ //
+				"footer { background-color:blue;"+ //
 				"color:white;"+ //
 				"clear:both;"+ //
 				"text-align:center;"+ //

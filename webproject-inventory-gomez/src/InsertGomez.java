@@ -58,7 +58,7 @@ public class InsertGomez extends HttpServlet {
 				"<head><title>" + title + "</title></head>\n" + //
 				"<body><header>\\n" + //
 				"<h1 align=\"center\">Inserted Data</h1>\n" + //
-				"<style> header { background-color:5e2bff;" + //
+				"<style> header { background-color:blue;" + //
 					"color:white;" + //
 					"text-align:center;"+ //
 					"padding:5px;}" + //	 
@@ -71,7 +71,7 @@ public class InsertGomez extends HttpServlet {
 				"section {width:350px;"+ //
 					"float:left;"+ //
 					"padding:10px;}"+ //
-				"footer { background-color:5e2bff;"+ //
+				"footer { background-color:blue;"+ //
 					"color:white;"+ //
 					"clear:both;"+ //
 					"text-align:center;"+ //
@@ -86,7 +86,7 @@ public class InsertGomez extends HttpServlet {
 	            "<section>" + //
 	            
 	            
-	            "For user <b>" + userName + "</b> the following has been added" + //
+	            "For user <b>" + userName + "</b> the following has been added:" + //
 	            "<ul>\n" + //
 
 		            "  <li><b>Item</b>: " + item + "\n" + //
