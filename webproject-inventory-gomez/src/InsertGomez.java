@@ -23,22 +23,25 @@ public class InsertGomez extends HttpServlet {
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       String userName = request.getParameter("userName");
-      String email = request.getParameter("email");
-      String phone = request.getParameter("phone");
-      String address = request.getParameter("address");
-   
+      String item = request.getParameter("item");
+      String quantity = request.getParameter("quantity");
+      String location = request.getParameter("location");
+      String value = request.getParameter("value");
+
 
       Connection connection = null;
-      String insertSql = " INSERT INTO MyTableGomez0204 (id, MYUSER, EMAIL, PHONE, ADDRESS) values (default, ?, ?, ?, ?)";
+      String insertSql = " INSERT INTO projectTable (id, USERNAME, ITEM, QUANTITY, LOCATION, VALUE) values (default, ?, ?, ?, ?, ?)";
 
       try {
          DBConnectionGomez.getDBConnection(getServletContext());
          connection = DBConnectionGomez.connection;
          PreparedStatement preparedStmt = connection.prepareStatement(insertSql);
          preparedStmt.setString(1, userName);
-         preparedStmt.setString(2, email);
-         preparedStmt.setString(3, phone);
-         preparedStmt.setString(4, address);
+         preparedStmt.setString(2, item);
+         preparedStmt.setString(3, quantity);
+         preparedStmt.setString(4, location);
+         preparedStmt.setString(5, value);
+
          preparedStmt.execute();
          connection.close();
       } catch (Exception e) {
@@ -58,9 +61,10 @@ public class InsertGomez extends HttpServlet {
             "<ul>\n" + //
 
             "  <li><b>User Name</b>: " + userName + "\n" + //
-            "  <li><b>Email</b>: " + email + "\n" + //
-            "  <li><b>Phone</b>: " + phone + "\n" + //
-            "  <li><b>Address</b>: " + address + "\n" + //
+            "  <li><b>Item</b>: " + item + "\n" + //
+            "  <li><b>Quantity</b>: " + quantity + "\n" + //
+            "  <li><b>Location</b>: " + location + "\n" + //
+            "  <li><b>Value</b>: " + value + "\n" + //
 
             "</ul>\n");
 

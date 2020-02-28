@@ -39,14 +39,14 @@ public class SearchGomez extends HttpServlet {
       Connection connection = null;
       PreparedStatement preparedStatement = null;
       try {
-         DBConnectionGomez.getDBConnection();
+         DBConnectionGomez.getDBConnection(getServletContext());
          connection = DBConnectionGomez.connection;
 
          if (keyword.isEmpty()) {
-            String selectSQL = "SELECT * FROM MyTableGomez0204";
+            String selectSQL = "SELECT * FROM projectTable";
             preparedStatement = connection.prepareStatement(selectSQL);
          } else {
-            String selectSQL = "SELECT * FROM MyTableGomez0204 WHERE MYUSER LIKE ?";
+            String selectSQL = "SELECT * FROM projectTable WHERE USERNAME LIKE ?";
             String theUserName = keyword + "%";
             preparedStatement = connection.prepareStatement(selectSQL);
             preparedStatement.setString(1, theUserName);
@@ -54,23 +54,25 @@ public class SearchGomez extends HttpServlet {
          ResultSet rs = preparedStatement.executeQuery();
 
          while (rs.next()) {
-            int id = rs.getInt("id");
-            String userName = rs.getString("myuser").trim();
-            String email = rs.getString("email").trim();
-            String phone = rs.getString("phone").trim();
-            String address = rs.getString("address").trim();
+             int id = rs.getInt("id");
+             String userName = rs.getString("username").trim();
+             String item = rs.getString("item").trim();
+             String quantity = rs.getString("quantity").trim();
+             String location = rs.getString("location").trim();
+             String value = rs.getString("value").trim();
 
-
-            if (keyword.isEmpty() || userName.contains(keyword)) {
-               out.println("ID: " + id + ", ");
-               out.println("User: " + userName + ", ");
-               out.println("Email: " + email + ", ");
-               out.println("Phone: " + phone + "<br>");
-               out.println("Address: " + address + " <br>");
-            }
-         }
+             if (keyword.isEmpty() || userName.contains(keyword)) {
+                out.println("ID: " + id + ", ");
+                out.println("User: " + userName + ", ");
+                out.println("Item: " + item + ", ");
+                out.println("Quantity: " + quantity +", ");
+                out.println("Location: " + location + ", ");
+                out.println("Value: " + value + " <br>");
+             }
+          }
          out.println("<a href=/webproject-inventory-gomez/search_gomez.html>Search Data</a> <br>");
          out.println("<a href=/webproject-inventory-gomez/insert_gomez.html>Insert Data</a> <br>");
+
          out.println("</body></html>");
          rs.close();
          preparedStatement.close();
